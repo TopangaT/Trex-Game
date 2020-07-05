@@ -94,14 +94,29 @@ function draw() {
    cloudsGroup.setLifetimeEach(-1);
    trex.changeAnimation("trex2");
    ground.velocityX = 0;
+   gameOver.visible = true;
+   restart.visible = true;
    cloudsGroup.setVelocityXEach(0);
    obstaclesGroup.setVelocityXEach(0);
+  }
+  if(mousePressedOver(restart)) {
+   reset(); 
   }
   textSize(16);
   text("Score:   "+count,420,50);
   trex.collide(invisGround);
   drawSprites();
 }
+function reset() {
+  gameState = PLAY
+  count = 0;
+  obstaclesGroup.destroyEach();
+  cloudsGroup.destroyEach();
+  gameOver.visible = false;
+  restart.visible = false;
+  trex.changeAnimation("trex1");
+}
+
 function spawnClouds() {
   if (frameCount % 60 === 0) {
     var cloud = createSprite(600,120,40,10);
